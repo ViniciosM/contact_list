@@ -23,6 +23,37 @@ class PersonDto extends DTO with PersonValidate {
     this.id = id ?? stringGenerator();
   }
 
+  PersonDto copyWith({
+    String? id,
+    String? name,
+    String? photo,
+    String? phone,
+    String? email,
+  }) =>
+      PersonDto(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        photo: photo ?? this.photo,
+        phone: phone ?? this.phone,
+        email: email ?? this.email,
+      );
+
+  factory PersonDto.fromJson(Map<String, dynamic> json) => PersonDto(
+        id: json["id"],
+        name: json["name"],
+        photo: json["photo"],
+        phone: json["phone"],
+        email: json["email"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "photo": photo,
+        "phone": phone,
+        "email": email,
+      };
+
   factory PersonDto.fromEntity(PersonEntity personEntity) {
     return PersonDto(
         name: personEntity.name,
